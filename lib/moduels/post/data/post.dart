@@ -6,16 +6,18 @@ part 'post.g.dart';
 @JsonSerializable()
 class Post {
   
-  final int id;
-  final int authorId;
+  final String? id;
+  final String authorId;
   final String postText;
-  final List<int> likes;
+  final Map<String, bool> likes;
+  final int createdAt;
 
   const Post({
-    required this.id, 
+    this.id, 
     required this.authorId, 
     required this.postText,
-    required this.likes});
+    required this.likes,
+    required this.createdAt});
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
   Map<String, dynamic> toJson() => _$PostToJson(this);

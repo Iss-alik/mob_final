@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "281968604634",
+    "project_id": "alimtairfianlproject",
+    "storage_bucket": "alimtairfianlproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281968604634:android:03413b61bb06edec99fce3",
+        "android_client_info": {
+          "package_name": "com.example.mob_final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGR6jzK7pNSLMw8tMKfAmMAGuB2IHdFv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

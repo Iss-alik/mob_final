@@ -7,12 +7,11 @@ part of 'post.dart';
 // **************************************************************************
 
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
-      id: (json['id'] as num).toInt(),
-      authorId: (json['authorId'] as num).toInt(),
+      id: json['id'] as String?,
+      authorId: json['authorId'] as String,
       postText: json['postText'] as String,
-      likes: (json['likes'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
+      likes: Map<String, bool>.from(json['likes'] as Map),
+      createdAt: (json['createdAt'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
@@ -20,4 +19,5 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'authorId': instance.authorId,
       'postText': instance.postText,
       'likes': instance.likes,
+      'createdAt': instance.createdAt,
     };
