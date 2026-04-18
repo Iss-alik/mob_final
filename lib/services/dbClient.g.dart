@@ -22,13 +22,13 @@ class _DbClient implements DbClient {
   String? baseUrl;
 
   @override
-  Future<User> getUser(id) async {
+  Future<Profile> getUser(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Profile>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -40,20 +40,20 @@ class _DbClient implements DbClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = User.fromJson(_result.data!);
+    final value = Profile.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> createOrUpdateUser(
     id,
-    user,
+    profile,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(user.toJson());
+    _data.addAll(profile.toJson());
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'PUT',
       headers: _headers,

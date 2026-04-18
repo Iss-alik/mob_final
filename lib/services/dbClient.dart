@@ -14,16 +14,21 @@ const post_table = DbConstants.post_table;
 
 @RestApi(baseUrl: DbConstants.base_url)
 abstract class DbClient {
-  factory DbClient(Dio dio, {String? baseUrl}) = _DbClient;
+  factory DbClient({String? baseUrl})
+  {
+    final dio = Dio(); 
+    dio.options.headers['Demo-Header'] = 'demo header';
+    return _DbClient(dio);
+  }
 
   // ==Users==
   @GET('/$user_table./{id}.json')
-  Future<User> getUser(@Path() String id);
+  Future<Profile> getUser(@Path() String id);
 
   @PUT('/$user_table./{id}.json')
   Future<void> createOrUpdateUser(
     @Path() String id,
-    @Body() User user,
+    @Body() Profile profile,
   );
 
   // ==Posts==
