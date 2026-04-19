@@ -11,3 +11,10 @@ class RegisterEvent extends AuthEvent{
 class AuthCheckEvent extends AuthEvent{
   AuthCheckEvent();
 }
+
+class LogInEvent extends AuthEvent{
+  final String email;
+  final String password;
+
+  LogInEvent({required this.email, required this.password});
+}

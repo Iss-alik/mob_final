@@ -13,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
     repository = AuthRepository();
     on<RegisterEvent>(_onRegister);
     on<AuthCheckEvent>(_onAuthCheck);
+    on<LogInEvent>(_onLigIn);
   }
 
   Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit)async {
@@ -38,6 +39,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
       final authentified = repository.checkAuth();
       
       if(authentified){
+        emit(AuthLoggedIn());
+      }
+
+      else{
+        emit(AuthLoggedOut());
+      }
+    }
+
+    catch(e){
+      emit(AuthFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onLigIn(LogInEvent event, Emitter<AuthState> emit) async{
+    try{
+      final logedIn = await repository.logIn(email: event.email, password: event.password);
+      
+      if(logedIn){
         emit(AuthLoggedIn());
       }
 

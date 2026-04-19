@@ -29,4 +29,10 @@ class AuthRepository{
     bool res = FirebaseAuth.instance.currentUser != null? true: false;
     return res;
   }
+
+  Future<bool> logIn({required String email, required String password}) async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    return Future.value(true);
+  }
+
 }

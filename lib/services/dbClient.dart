@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:mob_final/moduels/auth/data/user.dart';
 import 'package:mob_final/core/constants/db.dart';

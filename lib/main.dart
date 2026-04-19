@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mob_final/core/theme/theme.dart';
 import 'package:mob_final/moduels/auth/bloc/authBloc.dart';
 import 'package:mob_final/moduels/auth/bloc/authState.dart';
+import 'package:mob_final/moduels/auth/screens/registrationScreen.dart';
 import 'firebase_options.dart';
 
 void main()async {
@@ -26,15 +28,16 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => AuthBloc(), 
         ),
       ], 
-      child: ),
+      child: MyHomePage()),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context){
@@ -42,11 +45,11 @@ class MyHomePage extends StatelessWidget {
       builder: (context, state){
         if(state is AuthLoggedIn)
         {
-          
+          return RegistrationPage();
         }
-        else if (state is AuthLoggedOut)
+        else
         {
-          return null;
+          return RegistrationPage();
         }
       } 
     );
