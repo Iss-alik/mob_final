@@ -19,10 +19,10 @@ abstract class DbClient {
   }
 
   // ==Users==
-  @GET('/$user_table./{id}.json')
+  @GET('/$user_table/{id}.json')
   Future<Profile> getUser(@Path() String id);
 
-  @PUT('/$user_table./{id}.json')
+  @PUT('/$user_table/{id}.json')
   Future<void> createOrUpdateUser(
     @Path() String id,
     @Body() Profile profile,
@@ -33,7 +33,7 @@ abstract class DbClient {
   @GET('/$post_table.json')
   Future<Map<String, Post>?> getPosts();
 
-  @PUT('/$user_table./{id}.json')
+  @PUT('/$post_table/{id}.json')
   Future<void> createOrUpdatePost(
     @Path() String id,
     @Body() Post post,

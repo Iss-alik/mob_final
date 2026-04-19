@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mob_final/moduels/auth/bloc/authState.dart';
 import 'package:mob_final/moduels/auth/bloc/authEvent.dart';
 import 'package:mob_final/moduels/auth/bloc/authRepo.dart';
@@ -28,9 +29,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
         emit(AuthFailure("Registraion Failed"));
       }
     }
-
-    catch(e){
-      emit(AuthFailure(e.toString()));
+      on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          emit(AuthFailure('The password provided is too weak.'));
+        } else if (e.code == 'email-already-in-use') {
+          emit(AuthFailure('The account already exists for that email.'));
+        }
+      } catch (e) {
+        emit(AuthFailure(e.toString()));
     }
   }
 
@@ -63,6 +69,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
       else{
         emit(AuthLoggedOut());
       }
+    }
+
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(AuthFailure('No user found for that email.'));
+      } else if (e.code == 'wrong-password') {
+        emit(AuthFailure('Wrong password provided for that user.'));
+      }
+      else 
+        emit(AuthFailure(e.toString()));
     }
 
     catch(e){

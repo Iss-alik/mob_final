@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mob_final/core/theme/colors.dart';
 import 'package:mob_final/core/theme/spacing.dart';
 
 class InputField extends StatefulWidget {
@@ -48,7 +49,7 @@ class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSpacing.m),
+      padding: const EdgeInsets.all(AppSpacing.s),
       child: TextFormField(
         obscureText: widget.isPassword ? obscure : false,
         controller: widget.controller,

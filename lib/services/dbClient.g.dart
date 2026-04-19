@@ -14,7 +14,7 @@ class _DbClient implements DbClient {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'https://alimtairfianlproject-default-rtdb.asia-southeast1.firebasedatabase.app/';
+        'https://alimtairfianlproject-default-rtdb.asia-southeast1.firebasedatabase.app';
   }
 
   final Dio _dio;
@@ -35,7 +35,7 @@ class _DbClient implements DbClient {
     )
             .compose(
               _dio.options,
-              '/user./${id}.json',
+              '/user/${id}.json',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -61,7 +61,7 @@ class _DbClient implements DbClient {
     )
         .compose(
           _dio.options,
-          '/user./${id}.json',
+          '/user/${id}.json',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -110,7 +110,7 @@ class _DbClient implements DbClient {
     )
         .compose(
           _dio.options,
-          '/user./${id}.json',
+          '/post/${id}.json',
           queryParameters: queryParameters,
           data: _data,
         )

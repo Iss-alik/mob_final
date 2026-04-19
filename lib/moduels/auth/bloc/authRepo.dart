@@ -19,8 +19,7 @@ class AuthRepository{
 
     Profile profile = Profile(id: new_firebase_user.uid, name: name, email: email); 
 
-    _dbClient.createOrUpdateUser(profile.id!, profile);
-  
+    await _dbClient.createOrUpdateUser(profile.id!, profile);
     return Future.value(true);
   }
 

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mob_final/core/theme/spacing.dart';
+import 'package:mob_final/core/theme/textStyles.dart';
 import 'package:mob_final/moduels/auth/bloc/authBloc.dart';
 import 'package:mob_final/moduels/auth/bloc/authState.dart';
 import 'package:mob_final/moduels/auth/bloc/authEvent.dart';
 import 'package:mob_final/core/widgets/inputField.dart';
+import 'package:mob_final/moduels/auth/screens/authSreenc.dart';
 import 'package:mob_final/services/validation.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -60,11 +63,17 @@ class _RegistrationPageState extends State<RegistrationPage>{
       },
 
       child: Scaffold(
-      appBar: AppBar(title: Text('RegistarionScreen'),),
       body: Form(
         key: _formKey, 
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.all(AppSpacing.s),
+              child: Center(
+                  child: Text("Registration", style: AppTextStyles.title)
+                ),
+            ),
+
             InputField(validationFuncs: [Validators.notEmpty],
             label: 'Name',
             icon: Icons.person,
@@ -102,6 +111,8 @@ class _RegistrationPageState extends State<RegistrationPage>{
             onFieldSubmitted:  (_) => FocusScope.of(context).requestFocus(_nameFocus),
             ),
 
+            SizedBox(height: AppSpacing.s),
+
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).cardColor,
@@ -122,7 +133,26 @@ class _RegistrationPageState extends State<RegistrationPage>{
                 );
                 }
               }, 
-              child: Text("Register"))
+              child: Text("Register")
+            ),
+
+            SizedBox(height: AppSpacing.s),
+
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogInPage() )
+                );
+              },
+              child: Text(
+                "Already have a account?",
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontSize: 12
+                ),
+              ),
+            )
           ],
         ),
         
