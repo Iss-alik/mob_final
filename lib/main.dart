@@ -7,6 +7,11 @@ import 'package:mob_final/moduels/auth/bloc/authEvent.dart';
 import 'package:mob_final/moduels/auth/bloc/authState.dart';
 import 'package:mob_final/moduels/auth/screens/authSreenc.dart';
 import 'package:mob_final/moduels/auth/screens/registrationScreen.dart';
+import 'package:mob_final/moduels/post/bloc/postBloc.dart';
+import 'package:mob_final/moduels/post/bloc/postEvent.dart';
+import 'package:mob_final/moduels/post/bloc/postState.dart';
+import 'package:mob_final/moduels/post/screens/createPostScreen.dart';
+import 'package:mob_final/moduels/post/screens/postFeedScreen.dart';
 import 'firebase_options.dart';
 
 void main()async {
@@ -29,6 +34,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (_) => AuthBloc()..add(AuthCheckEvent()),
         ),
+        BlocProvider<PostBloc>(
+          create: (_) => PostBloc()..add(LoadPostEvent()),
+        ),
       ],
       child: MaterialApp(
         home: MyHomePage(),
@@ -50,7 +58,7 @@ class MyHomePage extends StatelessWidget {
         if(state is AuthLoggedIn)
         { 
           // Заглушка
-          return RegistrationPage();
+          return PostFeedPage();
         }
         else
         {

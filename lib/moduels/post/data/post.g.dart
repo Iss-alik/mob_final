@@ -7,16 +7,18 @@ part of 'post.dart';
 // **************************************************************************
 
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
-      id: json['id'] as String?,
+      id: json['id'] as String,
+      likes: json['likes'],
       authorId: json['authorId'] as String,
+      postTitle: json['postTitle'] as String,
       postText: json['postText'] as String,
-      likes: Map<String, bool>.from(json['likes'] as Map),
       createdAt: (json['createdAt'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'id': instance.id,
       'authorId': instance.authorId,
+      'postTitle': instance.postTitle,
       'postText': instance.postText,
       'likes': instance.likes,
       'createdAt': instance.createdAt,
