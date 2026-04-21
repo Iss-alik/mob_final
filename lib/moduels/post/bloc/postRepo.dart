@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mob_final/moduels/auth/data/user.dart';
 import 'package:mob_final/services/dbClient.dart';
 import 'package:mob_final/moduels/post/data/post.dart';
 
@@ -23,7 +25,9 @@ class PostRepository{
   }
 
   Future<bool> publishPost({required Post post}) async{
-    _dbClient.createOrUpdatePost(post.id!, post);
+    Profile user = await _dbClient.getUser(post.authorId);
+    post.authorName = user.name;
+    _dbClient.createOrUpdatePost(post.id, post);
     return Future.value(true);
   }
 
@@ -32,8 +36,10 @@ class PostRepository{
       post.likes.remove(userId);
     else 
       post.likes.add(userId);
-    _dbClient.createOrUpdatePost(post.id!, post);
+    _dbClient.createOrUpdatePost(post.id, post);
     return Future.value(true);
   }
+
+  
 
 }

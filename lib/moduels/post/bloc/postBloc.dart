@@ -38,23 +38,35 @@ class PostBloc extends Bloc<PostEvent, PostState>{
   }
 
   Future<void> _onLikePost(LikePostEvent event, Emitter<PostState> emit) async{
-    try{
+    
+    final currentState = state;
+    if(currentState is PostLoaded){ 
+      List<Post> updatedPosts = currentState.posts.map( 
+        (post) {
+          if(post.id == event.post.id)
+          {
+            final isLiked = post.likes.contains(event.userId);
 
-      final liked = await repository.likePost(post: event.post, userId: event.userId);      
-      emit(PostLoading());
-      List<Post> postList = await repository.loadPosts();
+            final updatedLikes = isLiked
+              ? post.likes.where((id) => id != event.userId).toList()
+              : [...post.likes, event.userId];
 
-      if(liked){
-        emit(PostLoaded(posts: postList));
-      }
+            return post.copyWith(likes: updatedLikes);
+          }
+          return post;
+        }
+      ).toList();
 
-      else{
-        emit(PostFailure("Post Liking Failed"));
-      }
+      emit(PostLoaded(posts: updatedPosts));
     }
 
+    try{
+      await repository.likePost(post: event.post, userId: event.userId); 
+      await repository.loadPosts();
+    }
+    
     catch(e){
-      emit(PostFailure(e.toString()));
+      emit(currentState);
     }
   }
 

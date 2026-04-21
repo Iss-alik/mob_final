@@ -36,11 +36,16 @@ class PostWidget extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
+              post.authorName ?? '[No name]',
+              style: AppTextStyles.caption,
+            ),
+
+            Text(
               post.postTitle,
               style: AppTextStyles.title,
             ),
 
-            SizedBox(height: AppSpacing.xs),
+            SizedBox(height: AppSpacing.s),
 
             Text(
               post.postText,

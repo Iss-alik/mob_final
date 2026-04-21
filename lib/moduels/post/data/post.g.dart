@@ -10,6 +10,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       id: json['id'] as String,
       likes: json['likes'],
       authorId: json['authorId'] as String,
+      authorName: json['authorName'] as String?,
       postTitle: json['postTitle'] as String,
       postText: json['postText'] as String,
       createdAt: (json['createdAt'] as num).toInt(),
@@ -18,6 +19,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'id': instance.id,
       'authorId': instance.authorId,
+      'authorName': instance.authorName,
       'postTitle': instance.postTitle,
       'postText': instance.postText,
       'likes': instance.likes,
