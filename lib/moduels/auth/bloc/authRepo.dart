@@ -33,5 +33,9 @@ class AuthRepository{
     await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     return Future.value(true);
   }
-
+  
+  Future<bool> logOut() async{
+    await FirebaseAuth.instance.signOut();
+    return Future.value(true);
+  }
 }

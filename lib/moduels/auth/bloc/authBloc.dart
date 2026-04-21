@@ -15,6 +15,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
     on<RegisterEvent>(_onRegister);
     on<AuthCheckEvent>(_onAuthCheck);
     on<LogInEvent>(_onLigIn);
+    on<LogOutEvent>(_onLogOut);
   }
 
   Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit)async {
@@ -84,5 +85,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
     catch(e){
       emit(AuthFailure(e.toString()));
     }
+  }
+
+  Future<void> _onLogOut(LogOutEvent event, Emitter<AuthState> emit) async{
+    bool logOut = await repository.logOut();
+    if(logOut)
+      emit(AuthLoggedOut());
   }
 }

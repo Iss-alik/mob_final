@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_final/core/theme/spacing.dart';
 import 'package:mob_final/core/theme/textStyles.dart';
 import 'package:mob_final/core/widgets/inputField.dart';
+import 'package:mob_final/moduels/navigation/bloc/navigationBloc.dart';
+import 'package:mob_final/moduels/navigation/bloc/navigationEvent.dart';
 import 'package:mob_final/moduels/post/bloc/postBloc.dart';
 import 'package:mob_final/moduels/post/bloc/postEvent.dart';
 import 'package:mob_final/moduels/post/bloc/postState.dart';
@@ -47,6 +49,12 @@ class _CreatPostPageState extends State<CreatPostPage>{
             SnackBar(content: Text(state.error))
           );
         }
+
+        else if(state is PostLoading)
+        {
+          context.read<NavigationBloc>().add(ChangePageEvent(0));
+        }
+
       },
 
       child: Scaffold(

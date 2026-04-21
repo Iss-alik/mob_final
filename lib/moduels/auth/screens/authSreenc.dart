@@ -99,11 +99,11 @@ class _LogInPageState extends State<LogInPage>{
                   _formKey.currentState!.save(); 
 
                   context.read<AuthBloc>().add(
-                  LogInEvent(
-                    email: email!,
-                    password: password!,
-                  ),
-                );
+                    LogInEvent(
+                      email: email!,
+                      password: password!,
+                    ),
+                  );
                 }
               }, 
               child: Text("Log in")

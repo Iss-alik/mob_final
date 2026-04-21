@@ -55,7 +55,9 @@ class _PostFeedPageState extends State<PostFeedPage>{
         else 
         {
           return Scaffold(
-            body: CircularProgressIndicator(),
+            body: Center(
+              child: CircularProgressIndicator()
+            ),
           );
         }
 
