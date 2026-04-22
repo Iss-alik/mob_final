@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_final/core/theme/spacing.dart';
@@ -63,7 +64,7 @@ class _LogInPageState extends State<LogInPage>{
             Padding(
               padding: EdgeInsets.all(AppSpacing.s),
               child: Center(
-                  child: Text("Log in", style: AppTextStyles.title)
+                  child: Text(context.tr("log in"), style: AppTextStyles.title)
                 ),
             ),
           
@@ -78,7 +79,7 @@ class _LogInPageState extends State<LogInPage>{
 
             InputField(
             validationFuncs: [Validators.notEmpty, Validators.minLength], 
-            label: "Password", 
+            label: context.tr("password"), 
             icon: Icons.shield, 
             onSaved: (value) => password = value,
             isPassword: true,
@@ -106,7 +107,7 @@ class _LogInPageState extends State<LogInPage>{
                   );
                 }
               }, 
-              child: Text("Log in")
+              child: Text(context.tr("log in"))
             ),
 
             SizedBox(height: AppSpacing.s),
@@ -119,7 +120,7 @@ class _LogInPageState extends State<LogInPage>{
                 );
               },
               child: Text(
-                "Dont have account?",
+                context.tr("no account"),
                 style: TextStyle(
                   decoration: TextDecoration.underline,
                   fontSize: 12

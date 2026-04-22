@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_final/moduels/navigation/bloc/navigationBloc.dart';
 import 'package:mob_final/moduels/navigation/bloc/navigationEvent.dart';
 import 'package:mob_final/moduels/navigation/bloc/navigationState.dart';
+import 'package:mob_final/moduels/news/screens/newsFeedScreen.dart';
 import 'package:mob_final/moduels/post/screens/createPostScreen.dart';
 import 'package:mob_final/moduels/post/screens/postFeedScreen.dart';
 import 'package:mob_final/moduels/profile/screens/profileScreen.dart';
@@ -16,11 +17,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin{
   
-  final pages = [PostFeedPage(), CreatPostPage(), ProfileScreen()];
+  final pages = [PostFeedPage(), CreatPostPage(), NewsFeedPage(), ProfileScreen()];
 
   final items = const[
     BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'Feed'),
     BottomNavigationBarItem(icon: Icon(Icons.create), label: 'Create'),
+    BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
   ];
 

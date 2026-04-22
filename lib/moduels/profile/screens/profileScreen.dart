@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_final/core/theme/colors.dart';
@@ -56,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     if (value.isEmpty) {
       setState(() {
-        errorText = "Username cannot be empty";
+        errorText = context.tr("empty name");
       });
       return;
     }
@@ -78,16 +79,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Profile Info"),
+        title: Text(context.tr("change profile")),
       ),
-      body: BlocBuilder<ProfileBloc, ProfileState>(
+      body: BlocConsumer<ProfileBloc, ProfileState>(
+        listenWhen: (previous, current) {
+          return previous.language != current.language;
+        },
+
+        listener: (context, state) {
+            context.setLocale(Locale(state.language));
+        } ,
+
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(AppSpacing.m),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Name", style: AppTextStyles.title),
+                Text(context.tr("name"), style: AppTextStyles.title),
                 const SizedBox(height: AppSpacing.s),
 
                 Row(
@@ -100,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               autofocus: true,
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                hintText: "Enter new username",
+                                hintText: context.tr("name helper"),
                                 errorText: errorText,
                               ),
                               onSubmitted: (_) => _save(),
@@ -133,14 +142,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 const SizedBox(height: 24),
 
-                const Text("Language", style: AppTextStyles.title),
+                Text(context.tr("language"), style: AppTextStyles.title),
                 const SizedBox(height: AppSpacing.s),
 
                 DropdownButtonFormField<String>(
                   value: state.language,
                   items: const [
                     DropdownMenuItem(value: 'ru', child: Text('Русский 🇷🇺')),
-                    DropdownMenuItem(value: 'kz', child: Text('Қазақ 🇰🇿')),
+                    DropdownMenuItem(value: 'kzk', child: Text('Қазақ 🇰🇿')),
                     DropdownMenuItem(value: 'en', child: Text('English 🇬🇧')),
                   ],
                   onChanged: (value) {
@@ -157,12 +166,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 const SizedBox(height: AppSpacing.l),
 
-                const Text("Theme", style: AppTextStyles.title),
+                Text(context.tr("theme"), style: AppTextStyles.title),
                 const SizedBox(height: AppSpacing.s),
 
                 SwitchListTile(
                   title: Text(
-                      state.isDark ? "Dark Theme" : "Light Theme"),
+                      state.isDark ? context.tr("dark"): context.tr("light")),
                   value: state.isDark,
                   onChanged: (_) {
                     context

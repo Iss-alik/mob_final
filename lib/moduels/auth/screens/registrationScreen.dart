@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_final/core/theme/spacing.dart';
@@ -33,7 +34,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
   String? password_match(String? value)
   {
     if(value != null && value != password_controller.text)
-    {  return "Passwords are not same";}
+    {  return context.tr("password not same");}
     
     return null;
   }
@@ -70,12 +71,12 @@ class _RegistrationPageState extends State<RegistrationPage>{
             Padding(
               padding: EdgeInsets.all(AppSpacing.s),
               child: Center(
-                  child: Text("Registration", style: AppTextStyles.title)
+                  child: Text(context.tr("register"), style: AppTextStyles.title)
                 ),
             ),
 
             InputField(validationFuncs: [Validators.notEmpty],
-            label: 'Name',
+            label: context.tr("name"),
             icon: Icons.person,
             onSaved: (value) => name = value,
             focusNode: _nameFocus,
@@ -93,7 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
 
             InputField(
             validationFuncs: [Validators.notEmpty, Validators.minLength], 
-            label: "Password", 
+            label: context.tr("password"), 
             icon: Icons.shield, 
             onSaved: (value) => password = value,
             isPassword: true,
@@ -104,7 +105,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
 
             InputField(
             validationFuncs: [Validators.notEmpty, Validators.minLength, password_match], 
-            label: "Confirm Password", 
+            label: context.tr("password2"), 
             icon: Icons.draw,
             isPassword: true,
             focusNode: _passwordConfirmFocus,
@@ -133,7 +134,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
                 );
                 }
               }, 
-              child: Text("Register")
+              child: Text(context.tr("register"))
             ),
 
             SizedBox(height: AppSpacing.s),
@@ -146,7 +147,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
                 );
               },
               child: Text(
-                "Already have a account?",
+                context.tr("have account"),
                 style: TextStyle(
                   decoration: TextDecoration.underline,
                   fontSize: 12

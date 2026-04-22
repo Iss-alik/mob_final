@@ -4,14 +4,19 @@
     "name": "Name",
     "register": "Register",
     "log in": "Log in",
+    "no account": "Don't have account?",
+    "have account": "Already have account?",
+    "password not same": "Passwords are not matching",
     "create post": "Create your Post",
     "post title": "Post's title",
     "post text": "Text of your post",
     "publish post": "Publish post",
     "change profile": "Change Profile Info",
+    "name helper": "Enter new name",
     "language": "Language",
     "log out": "Log out",
     "theme": "Theme",
     "dark": "Dark Theme",
-    "light": "Light Theme"
+    "light": "Light Theme",
+    "empy name": "Name can't be empty"
 }

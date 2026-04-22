@@ -1,0 +1,22 @@
+{
+    "password": "Пароль",
+    "password2": "Потдвердить пароль",
+    "name": "Имя",
+    "register": "Регистрация",
+    "log in": "Войти",
+    "no account": "Нету аккаунта?",
+    "have account": "Уже есть аккаунт?",
+    "password not same": "Пароли не совпадают",
+    "create post": "Создать пост",
+    "post title": "Название поста",
+    "post text": "Текст поста",
+    "publish post": "Опубликовать пост",
+    "change profile": "Изменить профиль",
+    "name helper": "Введите нове имя",
+    "language": "Язык",
+    "log out": "Выйти",
+    "theme": "Тема",
+    "dark": "Темная тема",
+    "light": "Светлая тема",
+    "empy name": "Имя не может быть пустым"
+}

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,8 @@ import 'package:mob_final/moduels/auth/bloc/authState.dart';
 import 'package:mob_final/moduels/auth/screens/authSreenc.dart';
 import 'package:mob_final/moduels/navigation/bloc/navigationBloc.dart';
 import 'package:mob_final/moduels/navigation/bloc/navigationEvent.dart';
+import 'package:mob_final/moduels/news/bloc/newsBloc.dart';
+import 'package:mob_final/moduels/news/bloc/newsEvents.dart';
 import 'package:mob_final/moduels/post/bloc/postBloc.dart';
 import 'package:mob_final/moduels/post/bloc/postEvent.dart';
 import 'package:mob_final/moduels/profile/bloc/profileBloc.dart';
@@ -18,12 +21,20 @@ import 'firebase_options.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ru'), Locale('kzk')],
+      path: 'assets/languages', // <-- change the path of the translation files 
+      fallbackLocale: Locale('en'),
+      child: MyApp()
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,6 +56,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProfileBloc>(
           create: (_) => ProfileBloc(),
         ),
+        BlocProvider<NewsBloc>(
+          create: (_) => NewsBloc()..add(LoadNewsEvent()),
+        ),
       ],
 
       child: BlocBuilder<ProfileBloc, ProfileState>(
@@ -54,6 +68,9 @@ class MyApp extends StatelessWidget {
             darkTheme: AppTheme.dark,
             themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
             home: MyHomePage(),
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
           );
         },
       )

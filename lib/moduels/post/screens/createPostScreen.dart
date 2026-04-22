@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,12 +66,12 @@ class _CreatPostPageState extends State<CreatPostPage>{
             Padding(
               padding: EdgeInsets.all(AppSpacing.s),
               child: Center(
-                  child: Text("Create your post", style: AppTextStyles.title)
+                  child: Text(context.tr("create post"), style: AppTextStyles.title)
                 ),
             ),
 
             InputField(validationFuncs: [Validators.notEmpty],
-            label: "Post's Title",
+            label: context.tr("post title"),
             icon: Icons.text_format,
             onSaved: (value) => postTitle = value,
             focusNode: _postTitleFocus,
@@ -79,7 +80,7 @@ class _CreatPostPageState extends State<CreatPostPage>{
 
             InputField(
             validationFuncs: [Validators.notEmpty], 
-            label: "Text of your post", 
+            label: context.tr("post text"), 
             onSaved: (value) => postText = value,
             focusNode: _postTextFocus,
             minLines: 3,
@@ -112,7 +113,7 @@ class _CreatPostPageState extends State<CreatPostPage>{
                   );
                 }
               }, 
-              child: Text("Create post")
+              child: Text(context.tr("publish post"))
             ),
           ],
         ),
