@@ -13,7 +13,7 @@ class _NewsClient implements NewsClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://newsapi.org/v2}';
+    baseUrl ??= 'https://newsapi.org/v2';
   }
 
   final Dio _dio;
@@ -22,7 +22,7 @@ class _NewsClient implements NewsClient {
 
   @override
   Future<NewsResponse> topHeadlines({
-    country = 'kz',
+    country = 'us',
     apiKey = apiKeyConst,
   }) async {
     const _extra = <String, dynamic>{};

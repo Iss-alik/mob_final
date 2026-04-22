@@ -19,6 +19,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin{
   
   final pages = [PostFeedPage(), CreatPostPage(), NewsFeedPage(), ProfileScreen()];
 
+
   final items = const[
     BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'Feed'),
     BottomNavigationBarItem(icon: Icon(Icons.create), label: 'Create'),

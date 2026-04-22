@@ -29,7 +29,7 @@ void main()async {
   
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ru'), Locale('kzk')],
+      supportedLocales: [Locale('en'), Locale('ru'), Locale('kk')],
       path: 'assets/languages', // <-- change the path of the translation files 
       fallbackLocale: Locale('en'),
       child: MyApp()
@@ -61,19 +61,26 @@ class MyApp extends StatelessWidget {
         ),
       ],
 
-      child: BlocBuilder<ProfileBloc, ProfileState>(
-        builder: (context, state) {
+      child: Builder(
+        builder: (context) {
           return MaterialApp(
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,
-            themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
-            home: MyHomePage(),
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
+
             locale: context.locale,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+
+            themeMode: context.select(
+              (ProfileBloc bloc) => bloc.state.isDark
+            )
+                ? ThemeMode.dark
+                : ThemeMode.light,
+
+            home: MyHomePage(),
           );
         },
-      )
+      ),
     );
   }
 }

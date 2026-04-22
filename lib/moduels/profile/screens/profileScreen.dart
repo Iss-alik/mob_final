@@ -149,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   value: state.language,
                   items: const [
                     DropdownMenuItem(value: 'ru', child: Text('Русский 🇷🇺')),
-                    DropdownMenuItem(value: 'kzk', child: Text('Қазақ 🇰🇿')),
+                    DropdownMenuItem(value: 'kk', child: Text('Қазақ 🇰🇿')),
                     DropdownMenuItem(value: 'en', child: Text('English 🇬🇧')),
                   ],
                   onChanged: (value) {

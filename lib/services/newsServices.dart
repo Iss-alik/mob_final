@@ -20,7 +20,7 @@ abstract class NewsClient {
 
   @GET('/top-headlines')
   Future<NewsResponse> topHeadlines({
-    @Query('country') String country = 'kz',
+    @Query('country') String country = 'us',
     @Query('apiKey') String apiKey = apiKeyConst,
   });
 }
