@@ -1,14 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_final/core/theme/colors.dart';
 import 'package:mob_final/core/theme/textStyles.dart';
 import 'package:mob_final/moduels/auth/bloc/authBloc.dart';
 import 'package:mob_final/moduels/auth/bloc/authEvent.dart';
+import 'package:mob_final/moduels/auth/data/user.dart';
 import 'package:mob_final/moduels/profile/bloc/profileBloc.dart';
 import 'package:mob_final/moduels/profile/bloc/profileEvent.dart';
 import 'package:mob_final/moduels/profile/bloc/profileState.dart';
 import 'package:mob_final/core/theme/spacing.dart';
+import 'package:mob_final/services/dbClient.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? errorText;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     final username = context.read<ProfileBloc>().state.username;
     controller = TextEditingController(text: username);
@@ -62,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return;
     }
 
-    context.read<ProfileBloc>().add(SetUsernameEvent(value));
+    context.read<ProfileBloc>().add(SetUsernameEvent(newName: value));
 
     setState(() {
       isEditing = false;

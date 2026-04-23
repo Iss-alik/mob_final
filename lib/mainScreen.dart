@@ -38,6 +38,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin{
             children: pages,
           ),
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             currentIndex: state is NavigationSuccess? state.pageIndex: 0,
             onTap: (index) {
               context.read<NavigationBloc>()

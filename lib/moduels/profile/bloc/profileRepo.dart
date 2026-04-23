@@ -9,17 +9,15 @@ class ProfileRepository {
   late SharedPreferencesWithCache prefences;
   late DbClient _dbClient;
 
-  ProfileRepository(){
-    initPref();
-    _dbClient = DbClient();
-  }
+  ProfileRepository();
 
-  void initPref() async{
+  Future<void> init() async {
     prefences = await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
-        allowList: <String>{'name', 'language', 'isDark'}, 
-      )
+        allowList: <String>{'name', 'language', 'isDark'},
+      ),
     );
+    _dbClient = DbClient();
   }
 
   void setName(String name) async{
@@ -36,5 +34,14 @@ class ProfileRepository {
 
   void toggleTheme(bool isDark) async{
       await prefences.setBool('isDark', !isDark);
+  }
+
+  Future<List<dynamic>> loadPreferences() async{
+    if(prefences.getString("name") == null){  
+      Profile profile = await _dbClient.getUser(FirebaseAuth.instance.currentUser!.uid);
+      prefences.setString('name', profile.name);
+    }
+
+    return [prefences.getString("name"), prefences.getString("language"), prefences.getBool("isDark")];
   }
 }

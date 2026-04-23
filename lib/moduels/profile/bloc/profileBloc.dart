@@ -15,14 +15,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>{
     on<SetUsernameEvent>(_onSetName);
     on<SetLanguageEvent>(_onSetLanguage);
     on<ToggleThemeEvent>(_onToggleTheme);
+    on<LoadProfile>(_loadProfile);
     
+    add(LoadProfile()); 
   }
 
   Future<void> _onSetName(SetUsernameEvent event, Emitter<ProfileState> emit)async {
     var curState = state;
     try{
       emit(ProfileState(username: event.newName, isDark: curState.isDark, language: curState.language));
-      repository.setName(event.newName);
+      if(!event.isLocal)
+        repository.setName(event.newName);
     }
        catch (e) {
         emit(curState);
@@ -53,5 +56,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>{
     catch(e){
       emit(curState);
     }
+  }
+
+  Future<void> _loadProfile(LoadProfile event, Emitter<ProfileState> emit) async{
+    await repository.init(); 
+    List<dynamic> preferences = await repository.loadPreferences();
+    emit(ProfileState(username: preferences[0], isDark: preferences[2], language: preferences[1]));
   }
 }
