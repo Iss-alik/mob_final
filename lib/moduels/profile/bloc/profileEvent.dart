@@ -13,3 +13,5 @@ class SetLanguageEvent extends ProfileEvent {
 }
 
 class LoadProfile extends ProfileEvent{}
+
+class ClearProfile extends ProfileEvent{}

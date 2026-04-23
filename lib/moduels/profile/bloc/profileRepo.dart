@@ -44,4 +44,10 @@ class ProfileRepository {
 
     return [prefences.getString("name"), prefences.getString("language"), prefences.getBool("isDark")];
   }
+
+  Future<void> clearPrefs() async {
+    await prefences.remove('name');
+    await prefences.remove('language');
+    await prefences.remove('isDark');
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mob_final/moduels/profile/bloc/profileEvent.dart';
 import 'package:mob_final/services/dbClient.dart';
 import 'package:mob_final/moduels/auth/data/user.dart';
 

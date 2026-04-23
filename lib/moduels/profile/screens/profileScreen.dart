@@ -76,6 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _logOut()
   {
     context.read<AuthBloc>().add(LogOutEvent());
+    context.read<ProfileBloc>().add(ClearProfile());
   }
 
   @override

@@ -16,7 +16,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>{
     on<SetLanguageEvent>(_onSetLanguage);
     on<ToggleThemeEvent>(_onToggleTheme);
     on<LoadProfile>(_loadProfile);
-    
+    on<ClearProfile>(_clearProfile);
+
     add(LoadProfile()); 
   }
 
@@ -62,5 +63,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>{
     await repository.init(); 
     List<dynamic> preferences = await repository.loadPreferences();
     emit(ProfileState(username: preferences[0], isDark: preferences[2], language: preferences[1]));
+  }
+
+  Future<void> _clearProfile(ClearProfile event, Emitter<ProfileState> emit) async{
+    await repository.clearPrefs();
+    emit(ProfileState(username: '', isDark: true, language: 'en'));
   }
 }

@@ -21,6 +21,25 @@ class Validators {
     return null;
   }
 
+  static String? validatePassword(String? password) {
+    if(password == null)
+      return "Field can't be empty";
+
+    if (password.length < 8) {
+      return "Password must be at least 8 characters";
+    }
+
+    if (!RegExp(r'[A-Z]').hasMatch(password)) {
+      return "Add at least one uppercase letter";
+    }
+
+    if (!RegExp(r'[0-9]').hasMatch(password)) {
+      return "Add at least one number";
+    }
+
+    return null;
+  }
+
   static String? email(String? value) {
     final emailRegex = RegExp(
       r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',

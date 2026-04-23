@@ -93,7 +93,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
             ),
 
             InputField(
-            validationFuncs: [Validators.notEmpty, Validators.minLength], 
+            validationFuncs: [Validators.notEmpty, Validators.validatePassword], 
             label: context.tr("password"), 
             icon: Icons.shield, 
             onSaved: (value) => password = value,
@@ -104,7 +104,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
             ),
 
             InputField(
-            validationFuncs: [Validators.notEmpty, Validators.minLength, password_match], 
+            validationFuncs: [Validators.notEmpty, password_match], 
             label: context.tr("password2"), 
             icon: Icons.draw,
             isPassword: true,
